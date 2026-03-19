@@ -1,6 +1,8 @@
 package com.example.crud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Usuario {
@@ -9,10 +11,13 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "{usuario.nombre.vacio}")
     private String nombre;
+
+    @NotBlank(message = "{usuario.email.vacio}")
+    @Email(message = "{usuario.email.invalido}")
     private String email;
 
-    // Constructor vacío
     public Usuario() {}
 
     public Usuario(String nombre, String email) {
@@ -20,7 +25,6 @@ public class Usuario {
         this.email = email;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
